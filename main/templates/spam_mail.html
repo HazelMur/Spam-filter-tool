@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="h2">Spam Mail</h2></div>
+<hr>
+<table class="myTable">
+  <tr>
+    <th>Date & Time</th>
+    <th>Sender</th>
+    <th>Subject</th>
+    <th>Body</th>
+    <th>Naive Bayes</th>
+  </tr>
+  {% for email in query_set %}
+  <tr>
+    <td>{{email.date_sent}}</td>
+    <td>{{email.sender}}</td>
+    <td>{{email.subject}}</td>
+    <td>{{email.body}}</td>
+    <td style="background-color:red;color:white;">{{email.naive_bayes_spam}}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock content %}

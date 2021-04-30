@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  {% if title %}
+    <title>ByeHackers - {{ title }}</title>
+  {% else %}
+    <title>ByeHackers</title>
+  {% endif %}
+  <style>
+
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    .form-control-label {
+      text-align: left;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) 450px*/
+    .row.content {height: 790px} 
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 18px;
+      background-color: #f1f1f1;
+      height: 100%;
+      position: relative;
+    }
+
+    .forms {
+      padding: 15px;
+    }
+    
+    body {
+      height: 100%;
+      min-height: 100%;
+      overflow: auto;
+    }
+
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 10px;
+      clear: both;
+      position: relative;
+      height: 60px;
+      margin-top: -60px;
+      width: 100%;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: 100%;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+
+    .btn-default {
+      background: #000;
+      color: #fff;
+      box-shadow: 1px 2px 5px #000000;
+      width: 48%;
+
+      /*float: center;*/
+   }
+
+   .btn1-default {
+      background: #000;
+      color: #fff;
+      box-shadow: 1px 2px 5px #000000;
+      width: 15%;
+   }
+
+  .btn-default:hover {
+      background: #FFFFFF;
+      color: #000;
+   }
+
+   .btn1-default:hover {
+      background: #FFFFFF;
+      color: #000;
+   }
+
+   .btn-outline-info {
+      width: 35%; 
+      background: #808080;
+      cursor: pointer;
+      color: #FFFFFF;
+   }
+
+  .carousel-control.right, .carousel-control.left {
+   background-image: none;
+   color: #FF0000;
+  }
+
+  .carousel-indicators li {
+    border-color: #FF0000;
+  }
+
+  .carousel-indicators li.active {
+    background-color: #FF0000;
+  }
+
+  .item h4 {
+    font-size: 19px;
+    line-height: 1.375em;
+    font-weight: 400;
+    font-style: italic;
+    margin: 50px 0;
+  }
+
+  .item span {
+    font-style: normal;
+  }
+
+  .button {
+  align-items: center;
+  color: white;
+  padding: 20px 32px;
+  text-align: center;
+  font-weight: bold;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+}
+
+.button1 {
+  background-color: #ffeeed; 
+  color: black; 
+  border: 4px solid #FF0000;
+}
+
+.invalid-feedback {
+  color: red;
+  background: #ffe0e0;
+  border: 1px solid #a33a3a; 
+}
+
+.myTable { 
+  border: 0px solid #69899F;
+  width: 100%;
+  }
+
+.myTable th { 
+
+padding:15px;
+    color:#fff;
+    text-shadow:1px 1px 1px #568F23;
+    border-bottom:3px solid #9ED929;
+    background-color:#9DD929;
+    background:-webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.02, rgb(123,192,67)),
+        color-stop(0.51, rgb(139,198,66)),
+        color-stop(0.87, rgb(158,217,41))
+        );
+    background: -moz-linear-gradient(
+        center bottom,
+        rgb(123,192,67) 3%,
+        rgb(139,198,66) 52%,
+        rgb(158,217,41) 88%
+        );
+    -webkit-border-top-left-radius:5px;
+    -webkit-border-top-right-radius:5px;
+    -moz-border-radius:5px 5px 0px 0px;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
+  }
+
+.myTable td {
+    width:100px;
+    padding:10px;
+    text-align:center;
+    vertical-align: top;
+    background-color:#DEF3CA;
+    border: 1px solid #BED3AB;
+    -moz-border-radius:2px;
+    -webkit-border-radius:2px;
+    border-radius:2px;
+    color: black;
+    text-shadow:1px 1px 1px #fff;
+}
+
+.h2 {
+  text-align: left;
+  color: black;
+}
+
+.form-group {
+  align-content: left;
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse"> <!-- puts the black colour into the nav bar-->
+  <div class="container-fluid">
+      <a class="navbar-brand disabled">ByeHackers</a> 
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        {% if current_user.is_authenticated %}
+        <li><a href="{{ url_for('main1.welcome') }}"><span class="glyphicon glyphicon-ok"> Authenicated</a></li>
+        {% else %}
+        <li><a href="{{ url_for('main1.home') }}"><span class="glyphicon glyphicon-home"> Home</a></li>
+        <li><a href="{{ url_for('main1.about') }}"><span class="glyphicon glyphicon-info-sign"> About</a></li>
+        {% endif %}
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        {% if current_user.is_authenticated %}
+        <li><a href="{{ url_for('users.account') }}"><span class="glyphicon glyphicon-user"></span> Account</a></li>
+        <li><a href="{{ url_for('users.logout') }}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        {% else %}
+        <li><a href="{{ url_for('users.login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li><a href="{{ url_for('users.register') }}"><span class="glyphicon glyphicon-log-in"></span> Register</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid text-center">    
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+      {% if current_user.is_authenticated %}
+      <p><a href="{{ url_for('posts.new_post') }}">Compose </a><span class="glyphicon glyphicon-pencil"></span></p> <!-- posts.post.new --> 
+      <p><a href="{{ url_for('main1.inbox_mail') }}">Inbox </a><span class="glyphicon glyphicon-save"></span></p>
+      <p><a href="{{ url_for('main1.sent') }}">Sent </a><span class="glyphicon glyphicon-open"></span></p>
+      <p><a href="{{ url_for('main1.spam_mail') }}">Spam </a><span class="glyphicon glyphicon-exclamation-sign"></span></p>
+      {% if current_user.is_admin %}
+      <p><a href="{{ url_for('main1.spam_report') }}">Spam Report </a><span class="glyphicon glyphicon-list-alt"></span></p>
+      <p><a href="{{ url_for('main1.registered_users') }}">Registered Users </a><span class="glyphicon glyphicon-list-alt"></span></p>
+      {% endif %}
+      <p><a href="{{ url_for('users.account') }}">Account </a><span class="glyphicon glyphicon-user"></span></p>
+      <p><a href="{{ url_for('users.logout') }}">Logout </a><span class="glyphicon glyphicon-log-out"></span></p>  
+      <!--ADMIN USER DISPLAY SPAM REPORT AND ALL REGISTERED USERS OF THE WEB APP-->
+      {% else %}
+      <!--DONT DISPLAY THE SIDENAV IF THE USER IS NOT LOGGED IN-->
+      {% endif %}
+    </div>
+
+    <div class="col-sm-8 text-left"> 
+      <div class="col-md-8">
+      <!--display flash messages-->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      <!--return any messages from the with flash function-->
+      {% if messages %} <!-- if messages is not empty then we have flash messages to display-->
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}"><!-- prints out the messages-->
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+      {% endwith %} <!--close endwith code block-->
+    </div>
+  
+      <div id="content">
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+    <div class="col-sm-2 sidenav"> <!--right side nav-->
+      {% if current_user.is_authenticated %} <!--if the user is logged in-->
+      <p></p>
+      {% else %}
+      <div class="well">
+        <p><b>STATS</p></b>
+      </div>
+      <div class="well">
+        <p>&#9888; 53.95% of e-mail traffic in March 2020 was spam.</p> 
+      </div>
+      <div class="well">
+        <p>&#9888; Email spam costs businesses $20.5 billion every year.</p>
+      </div>
+      <div class="well">
+        <p>&#9888; Around 107 billion spam emails are sent per day. By 2024, the figure is expected to increase to over 361.6 billion daily mails.</p>
+      </div>
+      <div class="well">
+        <p>&#9888; Bulk mailers can send approximately 250,000 messages an hour over a 28.8kb/s modem line.</p>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<footer class="container-fluid text-center"> <!--footer-->
+  <p>Copyright &#169 2021 byehackers.com. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

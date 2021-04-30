@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  {% if title %}
+    <title>ByeHackers - {{ title }}</title>
+  {% else %}
+    <title>ByeHackers</title>
+  {% endif %}
+</head>
+<body>
+  <header class="site-header"> <!-- Nav bar starts -->
+  <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+    <div class="container">
+      <a class="navbar-brand mr-4" href="/">Spam Checker</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarToggle">
+        <div class="navbar-nav mr-auto">
+          <a class="nav-item nav-link" href="{{ url_for('main1.home') }}">Home</a> 
+          <a class="nav-item nav-link" href="{{ url_for('main1.about') }}">About</a>
+        </div>
+        <!-- Navbar Right Side -->
+        <div class="navbar-nav">
+          {% if current_user.is_authenticated %} <!--this means the user is logged in-->
+            <a class="nav-item nav-link" href="{{ url_for('users.account') }}">Account</a>
+            <a class="nav-item nav-link" href="{{ url_for('users.logout') }}">Logout</a>
+          {% else %} <!--if their not logged in we want to show them the login and register route-->
+            <a class="nav-item nav-link" href="{{ url_for('users.login') }}">Login</a>
+            <a class="nav-item nav-link" href="{{ url_for('users.register') }}">Register</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </nav>
+</header> <!-- Nav bar ends -->
+
+  <main role="main" class="container"> <!-- Main starts -->
+  <div class="row">
+    <div class="col-md-8">
+      <!--display flash messages-->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      <!--return any messages from the with flash function-->
+      {% if messages %} <!-- if messages is not empty then we have flash messages to display-->
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}"><!-- prints out the messages-->
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+      {% endwith %} <!--close endwith code block-->
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+</main> 
+</body>
+</html>

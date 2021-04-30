@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+      {% if current_user.is_authenticated %}
+            <p></p>
+      {% else %}
+            <h2>Welcome to ByeHackers...</h2>
+            <hr>
+            <div class="text-center">
+                  <img src="{{url_for('static', filename='spam_filter_home.png')}}" class="rounded"/>
+            </div>
+             <hr>
+            <p>Find out more about ByeHackers, <button class="btn btn1-default"><a href="{{ url_for('main1.about') }}"> CLICK HERE</a></p></button>
+            <hr>
+            <p>Choose one of the following options to access the application:</p>
+            <button class="btn btn-default"><a href="{{ url_for('users.register') }}"><span class="glyphicon glyphicon-log-in"></span> Register</a></button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-default"><a href="{{ url_for('users.login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></button>
+      {% endif %}
+            <hr>
+            <p></p>
+{% endblock content %}

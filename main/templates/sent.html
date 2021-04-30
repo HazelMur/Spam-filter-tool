@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="h2">Sent</h2></div>
+<hr>
+<table class="myTable">
+  <tr>
+    <th>Date & Time</th>
+    <th>Recipient</th>
+    <th>Subject</th>
+    <th>Body</th>
+  </tr>
+  {% for email in query_set %}
+  <tr>
+    <td>{{email.date_sent}}</td>
+    <td>{{email.to}}</td>
+    <td>{{email.subject}}</td>
+    <td>{{email.body}}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock content %}

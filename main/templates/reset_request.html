@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="forms">
+	</div>
+	<div class="content=section">
+		<div class="col-sm-8 text-left">
+		<form method="POST" action="">
+			{{ form.hidden_tag() }} <!--Protects against XSS and CSRF attacks-->
+			<fieldset class="form-group">
+				<legend class="border-bottom mb-4">Reset Password</legend>
+				
+				<!--Email Form group-->
+				<div class="form-group">
+					{{ form.email.label(class="form-control-label")}} <!--Prints username label and bootstrap added to make it look nicer-->
+					<!--Print validation errors-->
+					<!--checking if the data entered is valid in the form and if not display errors to the user-->
+					{% if form.email.errors %}
+						{{ form.email(class="form-control form-control-lg is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.email.errors %}
+								<span>{{ error }}</span> <!--prints out the errors-->
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.email(class="form-control form-control-lg")}}
+					{% endif %}
+				</div>
+			</fieldset>
+
+			<!--Submit Form group-->
+			<div class="form-group">
+				{{ form.submit(class="btn btn-outline-info", disabled=True)}} <!-- this will display as a button-->
+			</div>
+		</form>
+	</div>
+</div>
+{% endblock content %}

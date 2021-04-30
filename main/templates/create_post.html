@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+<br>
+	<div class="content=section" align="left">
+		<form method="POST" action="">
+			{{ form.hidden_tag() }} <!--Protects against XSS and CSRF attacks-->
+			<fieldset class="col-sm-8 form-group">
+				<legend class="border-bottom mb-4">{{ legend }}</legend>
+				
+				<!--Recipient Form group-->
+				<div class="form-group">
+					{{ form.to.label(class="form-control-label")}} <!--Prints TO label-->
+					<!--Print validation errors-->
+					<!--checking if the data entered is valid in the form and if not display errors to the user-->
+					{% if form.to.errors %}
+						{{ form.to(class="form-control form-control-lg is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.to.errors %}
+								<span>{{ error }}</span> <!--prints out the errors-->
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.to(class="form-control form-control-lg")}}
+					{% endif %}
+				</div>
+
+				<!--Title Form group-->
+				<div class="form-group">
+					{{ form.title.label(class="form-control-label")}} <!--Prints Subject label-->
+					<!--Print validation errors-->
+					<!--checking if the data entered is valid in the form and if not display errors to the user-->
+					{% if form.title.errors %}
+						{{ form.title(class="form-control form-control-lg is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.title.errors %}
+								<span>{{ error }}</span> <!--prints out the errors-->
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.title(class="form-control form-control-lg")}}
+					{% endif %}
+				</div>
+
+				<div class="form-group">
+					{{ form.content.label(class="form-control-label")}} <!--Prints Body label-->
+					<!--Print validation errors-->
+					<!--checking if the data entered is valid in the form and if not display errors to the user-->
+					{% if form.content.errors %}
+						{{ form.content(class="form-control form-control-lg is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.content.errors %}
+								<span>{{ error }}</span> <!--prints out the errors-->
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.content(class="form-control form-control-lg")}}
+					{% endif %}
+				</div>
+			</fieldset>
+
+			<!--Submit Form group-->
+			<div class="form-group">
+				{{ form.submit(class="btn btn-outline-info")}} <!-- this will display the "Send" button-->
+			</div>
+		</form>
+	</div>
+{% endblock content %}

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<div class="h2">Spam Report #1</h2></div>
+<table class="myTable">
+  <tr>
+    <th>Total spam received in the last 7 days.</th>
+  </tr>
+  <tr>
+    <td>{{query_set}}</td>
+  </tr>
+</table>
+<hr>
+
+<div class="h2">Spam Report #2</h2></div>
+<p>Accounts who have received spam and the amount they have received.</p>
+<table class="myTable">
+  <tr>
+    <th>Account Name</th> 
+    <th>Spam Total</th>
+  </tr>
+  {% for row in spam_by_account%}
+  <tr>
+    <td>{{row.to}}</td>
+    <td>{{row.count}}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<img src="/plot.png" alt="my plot" height="400px">
+<hr>
+
+<div class="h2">Spam Report #3</h2></div>
+<p>Emails received that have been classified as spam.</p>
+<table class="myTable">
+  <tr>
+    <th>Date received</th> 
+    <th>Subject</th>
+    <th>Body</th>
+    <th>Naive Bayes Score</th>
+  </tr>
+  {% for spam in spam_email%}
+  <tr>
+    <td>{{spam.date_sent}}</td>
+    <td>{{spam.subject}}</td>
+    <td>{{spam.body}}</td>
+    <td>{{spam.naive_bayes_spam}}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock content %}
